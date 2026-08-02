@@ -1,0 +1,26 @@
+{
+  "name": "cs-465-full-stack-development",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidESmith-net/CS-465-Full-Stack-Development.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DavidESmith-net/CS-465-Full-Stack-Development/issues"
+  },
+  "homepage": "https://github.com/DavidESmith-net/CS-465-Full-Stack-Development#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "hbs": "^4.2.1",
+    "mongoose": "^9.8.0"
+  }
+}
