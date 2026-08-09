@@ -1,0 +1,53 @@
+<div class="container mt-4 mb-5">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h2 class="mb-4">Add a New Trip</h2>
+      
+      <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+        
+        <div class="form-group mb-3">
+          <label for="code" class="form-label">Trip Code:</label>
+          <input type="text" id="code" formControlName="code" class="form-control" placeholder="e.g. GALR210214">
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="name" class="form-label">Trip Name:</label>
+          <input type="text" id="name" formControlName="name" class="form-control" placeholder="e.g. Gale Reef">
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="length" class="form-label">Length:</label>
+          <input type="text" id="length" formControlName="length" class="form-control" placeholder="e.g. 4 nights / 5 days">
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="start" class="form-label">Start Date:</label>
+          <input type="date" id="start" formControlName="start" class="form-control">
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="resort" class="form-label">Resort:</label>
+          <input type="text" id="resort" formControlName="resort" class="form-control" placeholder="e.g. Galleon Resort, Grand Cayman">
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="perPerson" class="form-label">Per Person Cost:</label>
+          <input type="text" id="perPerson" formControlName="perPerson" class="form-control" placeholder="e.g. 1499.00">
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="image" class="form-label">Image Filename:</label>
+          <input type="text" id="image" formControlName="image" class="form-control" placeholder="e.g. reef1.jpg">
+        </div>
+
+        <div class="form-group mb-4">
+          <label for="description" class="form-label">Description:</label>
+          <textarea id="description" formControlName="description" class="form-control" rows="4"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!addForm.valid">Save Trip</button>
+      
+      </form>
+    </div>
+  </div>
+</div>

@@ -2,6 +2,8 @@ const express = require('express');
 const path = require('path');
 require('./app_api/models/db');
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 const PORT = 3000;
 
 // View engine setup for Handlebars
@@ -14,6 +16,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Register the new traveler route
 const travelRouter = require('./app_server/routes/travel');
 app.use('/travel', travelRouter);
+
+// Enable CORS for the Angular App
+app.use('/api', (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  next();
+});
 
 // Register the API route
 const apiRouter = require('./app_api/routes/index');
