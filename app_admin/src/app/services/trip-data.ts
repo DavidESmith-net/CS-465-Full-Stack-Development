@@ -2,6 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Trip } from '../models/trip';
 import { Injectable } from '@angular/core';
+import { User } from '../models/user';
+import { AuthResponse } from '../models/auth-response';
+import { BROWSER_STORAGE } from '../storage';
+import { Inject } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +13,10 @@ import { Injectable } from '@angular/core';
 export class TripDataService {
   private apiBaseUrl = 'http://localhost:3000/api/';
 
-  constructor(private http: HttpClient) { }
+ constructor(
+  private http: HttpClient,
+  @Inject(BROWSER_STORAGE) private storage: Storage
+) { }
 
   public getTrips(): Observable<Trip[]> {
     return this.http.get<Trip[]>(this.apiBaseUrl + 'trips');
@@ -29,4 +36,22 @@ export class TripDataService {
   public deleteTrip(tripCode: string): Observable<any> {
   return this.http.delete(this.apiBaseUrl + 'trips/' + tripCode);
   }
+
+  public login(user: User, passwd: string): Observable<AuthResponse> {
+    return this.handleAuthAPICall('login', user, passwd);
+  }
+
+  public register(user: User, passwd: string): Observable<AuthResponse> {
+    return this.handleAuthAPICall('register', user, passwd);
+  }
+
+  private handleAuthAPICall(endpoint: string, user: User, passwd: string): Observable<AuthResponse> {
+    let formData = {
+      name: user.name,
+      email: user.email,
+      password: passwd
+    };
+    return this.http.post<AuthResponse>(this.apiBaseUrl + endpoint, formData);
+  }
+
 }
