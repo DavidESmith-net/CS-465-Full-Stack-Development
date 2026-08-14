@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TripCardComponent } from '../trip-card/trip-card';
 import { TripDataService } from '../services/trip-data';
+import { AuthenticationService } from '../services/authentication';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-trip-listing',
@@ -15,12 +17,18 @@ export class TripListingComponent implements OnInit {
   trips: Array<any> = [];
   message: string = '';
 
-  constructor(
+ constructor(
     private tripDataService: TripDataService,
-    private cdr: ChangeDetectorRef
-  ) {
+    private cdr: ChangeDetectorRef,
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) { 
     console.log('trip-listing constructor');
   }
+
+public addTrip(): void {
+  this.router.navigate(['add-trip']);
+}
 
   private getTrips(): void {
     console.log('Inside TripListingComponent#getTrips');
@@ -45,6 +53,10 @@ export class TripListingComponent implements OnInit {
         }
       });
   }
+
+  public isLoggedIn(): boolean {
+  return this.authenticationService.isLoggedIn();
+}
 
   ngOnInit(): void {
     console.log('ngOnInit');
